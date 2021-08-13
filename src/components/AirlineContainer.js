@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import BASE_URL from '../constraints/index.js';
+import {BASE_URL} from '../constraints/index.js';
 
 
 export default function AirlineContainer() {
