@@ -1,61 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
 
-export default function Review({ review, deleteReview, updateReview, initialDelay=0 }) {
-    const [newReview, setNewReview] = useState({ ...review });
-    const [editMode, setEditMode] = useState(false);
-    const [render, setRender] = useState(false)
-  
-    useEffect(() => {
-      const timeout = setTimeout(() => {setRender(true)}, initialDelay)
-      return () => clearTimeout(timeout)
-    }, [initialDelay])
-  
+export default function Review({review, deleteReview}) {
+    const [newReview, setNewReview] =useState({...review})
+
     function handleChange(e) {
-      const updatedValue = { ...newReview };
-      updatedValue[e.target.name] = e.target.value;
-      setNewReview({ ...updatedValue });
+       const updatedValue = {...newReview}
+        updatedValue[e.target.name] = e.target.value
+        setNewReview(updatedValue)
     }
-  
-    function toggleEdit() {
-      setEditMode(!editMode);
-    }
-  
-    function handleUpdate(e) {
-      e.preventDefault();
-      updateReview(newReview);
-      setEditMode(false);
-    }
-  
-    if (!render) {
-      return <></>
-    }
-  
-    return (
-      <div className="card">
-        <Link to={`/reviews/${review.id}`}>
-          <p>{review.name}</p>
-        </Link>
-        <p>{review.title}</p>
-        <p>{review.description}</p>
-        <p>{review.score}</p>
 
-        {editMode && (
-          <>
+
+
+    return (
+        <div>
+        <br />
+            <p>Name: {review.name}</p>
+            <p>Title: {review.title}</p>
+            <p>Description: {review.description}</p>
+            <p>Score: {review.score}</p>
+
             <button onClick={() => deleteReview(review)}>Delete Review</button>
-  
-            <form onSubmit={handleUpdate}>
-              <input name="name" value={newReview.name} onChange={handleChange} />
-              <input
-                name="location"
-                value={newReview.location}
-                onChange={handleChange}
-              />
-              <button type="submit">Update Review</button>
+
+            <form onSubmit={(e) => {e.preventDefault()}}>
+                <input name={newReview.name} value={newReview.name} onChange={handleChange}/>
+                <input name={newReview.title} value={newReview.title} onChange={handleChange}/>
+                <input name={newReview.description} value={newReview.description} onChange={handleChange}/>
+                <input name={newReview.score} value={newReview.score} onChange={handleChange}/>
+                <button type="submit">updateReview</button>
+
             </form>
-          </>
-        )}
-        <button onClick={toggleEdit}>Edit</button>
-      </div>
-    );
-  }
+            <br />
+        </div>
+    )
+}
