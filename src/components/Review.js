@@ -1,14 +1,19 @@
 import React, {useState} from "react";
 
-export default function Review({review, deleteReview}) {
+export default function Review({review, deleteReview, updateReview}) {
     const [newReview, setNewReview] =useState({...review})
 
     function handleChange(e) {
        const updatedValue = {...newReview}
         updatedValue[e.target.name] = e.target.value
-        setNewReview(updatedValue)
+        setNewReview({...updatedValue})
     }
 
+
+    function handleUpdate(e) {
+        e.preventDefault()
+        updateReview(newReview)
+    }
 
 
     return (
@@ -21,13 +26,12 @@ export default function Review({review, deleteReview}) {
 
             <button onClick={() => deleteReview(review)}>Delete Review</button>
 
-            <form onSubmit={(e) => {e.preventDefault()}}>
+            <form onSubmit={handleUpdate}>
                 <input name={newReview.name} value={newReview.name} onChange={handleChange}/>
                 <input name={newReview.title} value={newReview.title} onChange={handleChange}/>
                 <input name={newReview.description} value={newReview.description} onChange={handleChange}/>
                 <input name={newReview.score} value={newReview.score} onChange={handleChange}/>
-                <button type="submit">updateReview</button>
-
+                <button type="submit">Update Review</button>
             </form>
             <br />
         </div>
