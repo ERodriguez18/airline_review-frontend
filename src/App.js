@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import AirlineContainer from './components/AirlineContainer';
+import ReviewContainer from './components/ReviewContainer';
 
 function App() {
   return (
     <div>
       <h1>Airline Reviewer</h1>
-      <AirlineContainer />
+      <ReviewContainer />
     </div>
   );
 }
