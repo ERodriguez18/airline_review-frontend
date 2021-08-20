@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
-export default function ReviewForm({createReview}) {
-    const [review, setReview] = useState({name: "", title: "", description: "", score: ""})
+export default function ReviewForm({createReview, airlineId}) {
+    const [review, setReview] = useState({name: "", title: "", description: "", score: "", airline_id:"" })
 
     function handleChange(e) {
         const updatedValue = {...review}
